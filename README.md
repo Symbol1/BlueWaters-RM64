@@ -6,7 +6,6 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 
 ## Directories on Blue Waters
 
-
 * `helloworld`, `rm16test`,`rm17pivot`,`rm32pivot`  
   Testing.
 
@@ -30,10 +29,10 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   Each file represents a subset of 57,295 monomials of the polynomial.
   * `rm35rref000.txt`
   * `rm35rref001.txt`
-  * etc
+  * vdots
   * `rm35rref310.txt`
 
-* `rm64square`, ... , `rm70square`, `rm70tutte`    
+* `rm64square`, ..., `rm70square`, `rm70tutte`    
   Wrong computation.
   (Due to overflow of bitfiled.)
 
