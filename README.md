@@ -11,19 +11,23 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   Testing.
 
 * `rm32rref`, `rm33rref`  
-  Wrong computation?@?@?@?
+  Trial computation.
+  Debug (overflow), optimize the code (pass by reference), 
+  and check against the pivot-signatutre etc.
 
 * `rm34rref`  
-   The RREF-signature polynomial of RM32 is computed here.
-   The computation is basically enumerate all 2^32 subsets.
-   The resulting file has @@@@@@@ lines (i.e. @@@@@ monomials in a polynomial).
-   * `rm32rref.txt`
+  The RREF-signature polynomial of RM32 is computed here.
+  The computation is basically enumerating all 2^32 subsets.
+  The resulting file, `rm32rref.txt`, has 17,818,745 lines
+  (i.e. 17,818,745 monomials in a polynomial).
+  After compressing, `rm32rref.zip` is 65.5Mib.
+  * `rm32rref.txt`
+  * `rm32rref.zip`
 
 * `rm35rref`  
-  Since `rm32rref.txt` has @@@@@@ lines,
+  Since `rm32rref.txt` has 17,818,745 lines,
   we divide then evenly into 311 files of the form `rm35rref123.txt`.
-  Each file represents a subset of @@@@@ monomials
-  of the RREF-signature polynomial of RM32.
+  Each file represents a subset of 57,295 monomials of the polynomial.
   * `rm35rref000.txt`
   * `rm35rref001.txt`
   * etc
@@ -74,4 +78,4 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   Wrong zip files.
 
 * `rm74square`  
-  The list of zip files of the form `123.zip`
+  The list of zip files of the form `123.zip` @@@
