@@ -6,6 +6,10 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 
 ## Directories on Blue Waters
 
+
+* `helloworld`, `rm16test`,`rm17pivot`,`rm32pivot`  
+  Testing.
+
 * `rm32rref`, `rm33rref`  
   Wrong computation?@?@?@?
 
@@ -63,7 +67,7 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 * `rm72square`  
   Recall that the pivot-signature polynomial of RM64
   is computed and stored arcoss 48,516 files.
-  We gather them and stored in this file.
+  We gather them and store in this file.
   * `rm64pivotall.txt`
 
 * `rm73square`  
