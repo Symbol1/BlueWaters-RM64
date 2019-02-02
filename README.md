@@ -6,7 +6,7 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 
 ## Directories on Blue Waters
 
-* > `helloworld`, `rm16test`,`rm17pivot`,`rm32pivot`
+* > `helloworld`, `rm16test`, `rm17pivot`, `rm32pivot`
   
   Testing by repeating the computation of something easy.
   These jobs can be done, and had been done, on my laptop.
@@ -23,8 +23,9 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   
   The RREF-signature polynomial of RM32 is computed here.
   The computation is basically enumerating all 2^32 subsets.
-  The resulting file, `rm32rref.txt`, has 17,818,745 lines
-  (i.e. 17,818,745 monomials in a polynomial).
+  That resulting polynomial has 17,818,745 monomials.
+  Each monomial is encoded as a line
+  so the resulting file, `rm32rref.txt`, has 17,818,745 lines.
   After compressing, `rm32rref.zip` is 65.5Mib.
   * > `rm32rref.txt`
   * > `rm32rref.zip`
@@ -33,13 +34,15 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   
   Since `rm32rref.txt` has 17,818,745 lines,
   we divide then evenly into 311 files of the form `rm35rref123.txt`.
-  Each file represents a subset of 57,295 monomials of the polynomial.
+  Each file has 57,295 lines,
+  which represents 57,295 monomials out of 17,818,745 monomials.
   * > `rm35rref000.txt`
   * > `rm35rref001.txt`
   * vdots
   * > `rm35rref310.txt`
 
-* > `rm64square`, ..., `rm70square`, `rm70tutte`
+* > `rm64square`, `rm65square`, `rm66square`, `rm67square`,
+    `rm68square`, `rm69square`, `rm70square`, `rm70tutte`
   
   Wrong computation.
   (Due to overflow of bitfiled.)
@@ -47,9 +50,9 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 * > `rm71square`
   
   From RREF-signature polynomial of RM32
-  we want to the pivot-signature polynomial of RM64.
+  we want to compute the pivot-signature polynomial of RM64.
   The computation is like computing the square of the polynomial.
-  Since we devide the polynomial into 311 *sub*polynomials,
+  Since we divide the polynomial into 311 *sub*polynomials,
   it suffices to compute the product of any two *sub*polynomials.
   The resulting files are called `rm64pivot123x234.txt` or so.
   See the @@@@@@ part.
@@ -80,8 +83,16 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   
   Recall that the pivot-signature polynomial of RM64
   is computed and stored arcoss 48,516 files.
+  (48,516 is 1+2+...+311)
   We gather them and store in this file.
-  * `rm64pivotall.txt`
+  * > `rm64pivotall.txt`
+
+* > `rm72tutte`
+  
+  From the pivot-signature polynomial of RM64
+  we can compute the Tutte polynomials.
+  In particular that of the \[64,22,16\]-Reed-Muller codes.
+  * > `rm72tutte.txt`
 
 * > `rm73square`
   
@@ -89,4 +100,12 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
 
 * > `rm74square`
   
-  The list of zip files of the form `123.zip` @@@
+  The list of zip files of the form `123.zip`.
+  A file like `123.zip` is the compression of files `rm64pivot123*`.
+  That is, each zip file contains 156 txt files,
+  starting from `$i` to `$(( ($i+155)%310 ))`
+  
+  * > `000.zip`
+  * > `001.zip`
+  * vdots
+  * > `310.zip`
