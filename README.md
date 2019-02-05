@@ -17,8 +17,8 @@ The [64, 22, 16]-[Reed-Muller code](https://en.wikipedia.org/wiki/Reed%E2%80%93M
 ```
 ```python
 [
-  [c&r==0 for c in range(64)]
-          for r in range(64) if bin(r).count('1') < 3
+  [ c&r==0 for c in range(64) ]
+           for r in range(64) if bin(r).count('1') < 3
 ]
 ```
 We compute its Tutte polynomial and more general invariants on Blue Waters.
