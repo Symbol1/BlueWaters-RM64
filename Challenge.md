@@ -1,18 +1,8 @@
 
 # Challenge the computation
 
-**Blue Waters** is a petascale supercomputer
-at the National Center for Supercomputing Applications (NCSA)
-at the University of Illinois at Urbana-Champaign.
-
-The [64, 22, 16]-Reed-Muller code is also known as RM(2, 6).
-We compute its Tutte polynomial and more general invariants on Blue Waters.
-
-The computation costs about 2,000 node-hours.
-We divide the computation (not quite evenly) into about 48,520 subjobs.
-All subjobs are feasible on descent laptops;
-most of them costs less than 10 node-minuts.
-Challengers are invited to double-check any subset of subjobs.
+There are several scientific ways to double check our computation,
+[hypothesis testning](#-Hypothesis-testing) is one of them.
 
 ## Hypothesis testing
 
