@@ -2,7 +2,7 @@
 # Challenge the computation
 
 There are several scientific ways to double check our computation,
-[hypothesis testning](#-Hypothesis-testing) is one of them.
+[hypothesis testning](#Hypothesis-testing) is one of them.
 
 ## Hypothesis testing
 
