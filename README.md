@@ -26,7 +26,7 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   That resulting polynomial has 17,818,745 monomials.
   Each monomial is encoded as a line
   so the resulting file, `rm32rref.txt`, has 17,818,745 lines.
-  After compressing, `rm32rref.zip` is 65.5Mib.
+  After compressing, `rm32rref.zip` is 68.7Mb.
   * > `rm32rref.txt`
   * > `rm32rref.zip`
 
@@ -88,6 +88,9 @@ Computation of Reed-Muller codes of length 64 on BlueWaters
   is computed and stored arcoss 48,516 files.
   (48,516 is 1+2+...+311.)
   We gather them and store in this file.
+  It is has 7828354 lines/monomials and is 274MB.
+  After compressing 42.7MB.
+  
   * > `rm64pivotall.txt`
 
 * > `rm72tutte`
