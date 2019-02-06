@@ -41,11 +41,17 @@ And then we compare the approximation to our result.
 
 ## Hypothesis testing
 
+The computation costs 2,000 node-hours.
+We divide the computation into 48,520 subjobs.
+All subjobs are feasible on descent laptops;
+most of them costs less than 3 node-minuts.
+Challengers are invited to rerun any subset of subjobs.
+
 * **Null hypothesis:**
-  We made a systematic mistake that affects 1% of subjobs.
+  We made a systematic mistake that affects 1% of subjobs or more.
 
 * **Alternative hypothesis:**
-  We did not make such mistake.
+  Less than 1% of subjobs are broken.
 
 Assume a challenger randomly selects 70 out of 48,520 subjobs
 and reruns them correctly (which should cost one laptop-day).
