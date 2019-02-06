@@ -21,7 +21,7 @@ The [64, 22, 16]-[Reed-Muller code](https://en.wikipedia.org/wiki/Reed%E2%80%93M
            for r in range(64) if bin(r).count('1') < 3
 ]
 ```
-We compute its Tutte polynomial and more general invariants on Blue Waters.
+We compute its [Tutte polynomial](https://en.wikipedia.org/wiki/Tutte_polynomial) and more general invariants on Blue Waters.
 
 The computation costs 2,000 node-hours.
 We divide the computation (not quite evenly) into 48,520 subjobs.
