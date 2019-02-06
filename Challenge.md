@@ -36,16 +36,17 @@ of the 64 columns of the generator matrix.
 Enumerating all 2^64 possibilities is not currently feasible.
 But a challenger can sample, say, one million subsets per second.
 Note that the Tutte polynomial has at most 989 monomials.
-Sampling billions of subsets should give us a good approximation.
+Sampling billions of subsets should give a good approximation.
 And then we compare the approximation to our result.
 
 ## Hypothesis testing
 
-The computation costs 2,000 node-hours.
+The full computation costs 2,000 node-hours.
 We divide the computation into 48,520 subjobs.
 All subjobs are feasible on descent laptops;
-most of them costs less than 3 node-minuts.
+most of them costs less than 3 node-minutes.
 Challengers are invited to rerun any subset of subjobs.
+Here is a possible steup.
 
 * **Null hypothesis:**
   We made a systematic mistake that affects 1% of subjobs or more.
