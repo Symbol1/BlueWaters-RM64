@@ -49,7 +49,7 @@ Challengers are invited to rerun any subset of subjobs.
 Here is a possible steup.
 
 * **Null hypothesis:**
-  We made a systematic mistake that affects 1% of subjobs or more.
+  We made a systematic mistake that breaks 1% of subjobs or more.
 
 * **Alternative hypothesis:**
   Less than 1% of subjobs are broken.
