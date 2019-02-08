@@ -23,14 +23,16 @@ and see if it coincides with that given by Magma.
 
 ## Direct Sampling
 
-Recall that the Tutte polynomial is defined as
+Recall that the
+[Tutte polynomial](https://en.wikipedia.org/wiki/Tutte_polynomial)
+is defined as
 ```python
 sum(
-    x^(corank of E) * y^(nullity of E)
-             for E in ErasurePatterns
+    x^(corank of A) * y^(nullity of A)
+             for A in AccessPatterns
 )
 ```
-where `ErasurePatterns` contains all 2^64 subsets
+where `AccessPatterns` contains all 2^64 subsets
 of the 64 columns of the generator matrix.
 
 Enumerating all 2^64 possibilities is not currently feasible.
@@ -70,5 +72,8 @@ The data is uploaded to Google Drive
 https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M?usp=sharing
 
 
-
+### Remark
+The hypothesis testing idea is not new.
+See, e.g.,
+[Miller–Rabin primality test](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test).
 

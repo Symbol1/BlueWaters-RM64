@@ -1,5 +1,9 @@
 # Directories on Blue Waters
 
+The project ID of our computation is `baus`.
+The following is a note on what is inside the directory
+`/projects/sciteam/baus`.
+
 * > `helloworld`, `rm16test`, `rm17pivot`, `rm32pivot`
   
   Testing by repeating the computation of something easy.
