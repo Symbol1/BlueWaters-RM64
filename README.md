@@ -22,5 +22,7 @@ We deliberately divide the computation into 48,520 subjobs so that
 anyone can challenge our computation by rerunning only a subset of subjobs.
 This makes our computation (economically) falsifiable.
 
+The full data set is uploaded to my
+[Google Drive .edu account](https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M?usp=sharing).
 See [how to challenge the computation](Challenge.md)
 for more information.
