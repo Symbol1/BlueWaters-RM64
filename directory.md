@@ -48,15 +48,14 @@ The following is a note on what is inside the directory
 
 * > `rm71square`
   
-  From RREF-signature polynomial of RM32
+  From the RREF-signature polynomial of RM32
   we want to compute the pivot-signature polynomial of RM64.
-  The computation is like computing the square of the polynomial `rm32rref`.
-  Since we had divided the polynomial `rm32rref` into 311 *sub*polynomials,
+  The computation is like computing the square of the polynomial `rm32rref.txt`.
+  Since we had divided the polynomial `rm32rref.txt` into 311 *sub*polynomials,
   it suffices to compute the product of any two *sub*polynomials.
   The resulting files are called
   `rm64pivot123x234.txt` or `rm64pivot${i}x$(( ($i+$j)%310 )).txt` in general.
   Here `$i` runs from `000` to `310`; and `$j` runs from `000` to `155`.
-  See the @@@@@@ part.
   * > `rm64pivot000x000.txt`
   * > `rm64pivot000x001.txt`
   * vdots
@@ -83,9 +82,9 @@ The following is a note on what is inside the directory
 * > `rm72square`
   
   Recall that the pivot-signature polynomial of RM64
-  is computed and stored arcoss 48,516 files.
-  (48,516 is 1+2+...+311.)
-  We gather them and store in this file.
+  is computed distributedly and stored across 48,516 files.
+  (48,516 = 1 + 2 + ... + 311.)
+  We gather them and store the final result in this file.
   It is has 7828354 lines/monomials and is 274MB.
   After compressing 42.7MB.
   

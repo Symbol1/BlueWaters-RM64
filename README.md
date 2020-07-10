@@ -53,7 +53,7 @@ This makes our computation (economically) **[falsifiable]**.
 
 The full data set is uploaded to my
 [Google Drive .edu account].
-See [how to challenge the computation](Challenge.md) for more information.
+See [how to challenge the computation](challenge.md) for more information.
 
 [Blue Waters]: https://en.wikipedia.org/wiki/Blue_Waters
 [Reed-Muller code]: https://en.wikipedia.org/wiki/Reed%E2%80%93Muller_code
