@@ -1,5 +1,5 @@
 
-# Challenge the computation
+# Challenge the Computation
 
 Our computation assumes some mathematical shortcuts
 and exploits bitwise operations.
@@ -25,7 +25,7 @@ The latter is checked against Magma and passes the test.
 
 For the record, the weight enumerator is ...(TBA)
 
-## Naïve Sampling
+## Naïve sampling
 
 Recall that the Tutte polynomial
 is defined as
