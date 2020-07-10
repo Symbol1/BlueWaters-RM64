@@ -80,7 +80,7 @@ This is usually considered statistically significant.
 The data is uploaded to Google Drive  
 <https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>
 
-For data format, see [Directories on BW](baus-directory.md).
+For data format, see [Directories on BW](directory.md).
 
 ### Remark
 The hypothesis testing idea is widely applicable.
