@@ -46,7 +46,7 @@ So this is not the way we computed the exact Tutte polynomial.
 On the other hand, modern laptops can sample,
 say, one million subsets per second.
 So a challenger can sample sufficiently many subsets
-and check if the relative frequency of x^cy^n for any c, n.
+and check if the relative frequency of x^c*y^n for any c, n.
 
 Note that the Tutte polynomial has at most 989 monomials.
 Therefore, sampling billions of subsets
@@ -79,7 +79,7 @@ If, instead, the challenger randomly selects and reruns 300 subjobs
 This is usually considered statistically significant.
 
 The data is uploaded to Google Drive  
-<https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>
+<https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>.
 
 For data format, see [Directories on BW](directory.md).
 
