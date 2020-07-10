@@ -35,6 +35,7 @@ sum(
     x^(corank of A) * y^(nullity of A) for A in AccessPatterns
 )
 ```
+
 where `AccessPatterns` contains all subsets
 of the columns of a generator matrix.
 For a code of length 64---for instance RM(2, 6)---there are 2^64 subsets.
@@ -83,6 +84,7 @@ The data is uploaded to Google Drive
 For data format, see [Directories on BW](directory.md).
 
 ### Remark
+
 The hypothesis testing idea is widely applicable.
 See, e.g., [Miller--Rabin primality test].
 
