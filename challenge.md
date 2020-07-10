@@ -23,7 +23,13 @@ To support that our Tutte polynomial is computed correctly,
 we reduce our Tutte polynomial to a weight distribution.
 The latter is checked against Magma and passes the test.
 
-For the record, the weight enumerator is ...(TBA)
+For the record, the weight enumerator is 
+
+```python
+       x^64      +    2604*x^48*y^16 + 291648*x^40*y^24 +
+888832*x^36*y^28 + 1828134*x^32*y^32 + 888832*x^28*y^36 +
+291648*x^24*y^40 +    2604*x^16*y^48 +             y^64
+```
 
 ## Naïve sampling
 
