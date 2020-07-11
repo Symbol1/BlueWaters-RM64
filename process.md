@@ -98,14 +98,15 @@ Choose a generator matrix such that
 * its first column generates `RM(0, 6)`.
 * its first seven columns generate `RM(1, 6)`,
 * ...
-* its first 57 columns generates `RM(5, 6)`, and
+* its first 63 columns generates `RM(5, 6)`, and
 * it generates `RM(6, 6)`,
 
 In other words, we are augmenting the generator matrices
 of `rm(0, 6)`, `rm(1, 6)`, ..., and `rm(6, 6)`.
 Note that we are using thin and tall generator matrices,
 and message vectors are multiplied from the right.
-For the record, the matrix looks like 
+For the record, the matrix looks like
+
 ```text
 ################################################################
 #-#####--#-##-###-####---#--#-##--#-##-###----#---#--#-##-----#-
@@ -331,9 +332,6 @@ Now apply the recursive rule:
 ```
 
 Now take RREF and read off pivots of RM64.
-
-
-
 
 Note that `RREFSign(RM32)` does not determine `RREFSign(RM64)`;
 this method is not inductive.
