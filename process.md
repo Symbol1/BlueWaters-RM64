@@ -188,3 +188,8 @@ Note that `RREF_Sign( RM32 )` does not determine `RREF_Sign( RM64 )`;
 this method is not inductive.
 As a result, if we want to understand `Pivot_Sign( RM128 )`,
 we will have to build the understanding of `RREF_Sign( RM64 )` from scratch.
+
+## Implementation details
+
+For how the data is generated and stored on Blue Waters,
+see [Directories on BW](directory.md).

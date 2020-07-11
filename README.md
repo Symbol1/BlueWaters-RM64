@@ -52,9 +52,9 @@ We deliberately divide the computation into 48,520 subjobs so that
 anyone can challenge our computation by rerunning only a subset of subjobs.
 This makes our computation (economically) **[falsifiable]**.
 
-The full data set is uploaded to my
-[Google Drive .edu account].
-See [how to challenge the computation](challenge.md) for more information.
+The full data set is uploaded to my [Google Drive .edu account].
+See [process overview](process.md) for the general idea behind the computation.
+One can also [challenge the computation](challenge.md).
 
 [Blue Waters]: https://en.wikipedia.org/wiki/Blue_Waters
 [Reed-Muller code]: https://en.wikipedia.org/wiki/Reed%E2%80%93Muller_code
