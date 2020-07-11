@@ -191,5 +191,7 @@ we will have to build the understanding of `RREF_Sign( RM64 )` from scratch.
 
 ## Implementation details
 
-For how the data is generated and stored on Blue Waters,
+See [data format](format.md).
+
+For details concerning folder and file names on Blue Waters,
 see [Directories on BW](directory.md).
