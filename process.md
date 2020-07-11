@@ -246,12 +246,12 @@ we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
 
 ```text
 [1]
-  [1 0 b e]
-  [  1 c f]
-          [1 j 0 n s x]
-          [    1 o t y]
-                      [. . . .]
-                      [      .]
+  ⌈1 0 b e⌉
+  ⌊  1 c f⌋
+          ⌈1 j 0 n s x⌉
+          ⌊    1 o t y⌋
+                      ⌈. . . .⌉
+                      ⌊      .⌋
                               [.]
 ```
 
@@ -283,13 +283,13 @@ We take two RREF-pattern from RM16:
 
 ```text
 [A]
-  [B B B B]
-  [    B B]
-          [C C C C C C]
-          [    C C C C]
-          [        C C]
-                      [D D D D]
-                      [    D D]
+  ⌈B B B B⌉
+  ⌊    B B⌋
+          ⌈C C C C C C⌉
+          |    C C C C|
+          ⌊        C C⌋
+                      ⌈D D D D⌉
+                      ⌊    D D⌋
                               [E]
 ```
 
@@ -297,12 +297,12 @@ and
 
 ```text
 [F]
-  [G G G G]
-  [  G G G]
-  [      G]
-          [H H H H H H]
-          [  H H H H H]
-          [          H]
+  ⌈G G G G⌉
+  |  G G G|
+  ⌊      G⌋
+          ⌈H H H H H H⌉
+          |  H H H H H|
+          ⌊          H⌋
                       [  I I I]
                               [ ]
 ```
@@ -310,22 +310,22 @@ and
 Now apply the recursive rule:
 
 ```text
-[A  ]
-[F F]
-    [B B B B        ]
-    [    B B        ]
-    [G G G G G G G G]
-    [  G G G   G G G]
-    [      G       G]
-                    [C C C C C C            ]
-                    [    C C C C            ]
-                    [        C C            ]
-                    [H H H H H H H H H H H H]
-                    [  H H H H H   H H H H H]
-                    [          H           H]
-                                             [D D D D        ]
-                                             [    D D        ]
-                                             [  I I I   I I I]s
+⌈A  ⌉
+⌊F F⌋
+    ⌈B B B B        ⌉
+    |    B B        |
+    |G G G G G G G G|
+    |  G G G   G G G|
+    ⌊      G       G⌋
+                    ⌈C C C C C C            ⌉
+                    |    C C C C            |
+                    |        C C            |
+                    |H H H H H H H H H H H H|
+                    |  H H H H H   H H H H H|
+                    ⌊          H           H⌋
+                                             ⌈D D D D        ⌉
+                                             |    D D        |
+                                             ⌊  I I I   I I I⌋
                                                              [E  ]
 ```
 
@@ -335,6 +335,10 @@ Note that `RREFSign(RM32)` does not determine `RREFSign(RM64)`;
 this method is not inductive.
 As a result, if we want to understand `PivotSign(RM128)`,
 we will have to build the understanding of `RREFSign(RM64)` from scratch.
+
+## Scale and parallelism
+
+@@@
 
 ## Implementation details
 

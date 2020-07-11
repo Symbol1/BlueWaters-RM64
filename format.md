@@ -21,36 +21,36 @@ RREF-pattern is more complicated.
 In general, an RREF-pattern of RM32 looks like
 ```
 [A]
-  [B B B B B]
-  [  B B B B]
-  [    B B B]
-  [      B B]
-  [        B]
-            [C C C C C C C C C C]
-            [  C C C C C C C C C]
-            [    C C C C C C C C]
-            [      C C C C C C C]
-            [        C C C C C C]
-            [          C C C C C]
-            [            C C C C]
-            [              C C C]
-            [                C C]
-            [                  C]
-                                [D D D D D D D D D D]
-                                [  D D D D D D D D D]
-                                [    D D D D D D D D]
-                                [      D D D D D D D]
-                                [        D D D D D D]
-                                [          D D D D D]
-                                [            D D D D]
-                                [              D D D]
-                                [                D D]
-                                [                  D]
-                                                    [E E E E E]
-                                                    [  E E E E]
-                                                    [    E E E]
-                                                    [      E E]
-                                                    [        E]
+  ⌈B B B B B⌉
+  |  B B B B|
+  |    B B B|
+  |      B B|
+  ⌊        B⌋
+            ⌈C C C C C C C C C C⌉
+            |  C C C C C C C C C|
+            |    C C C C C C C C|
+            |      C C C C C C C|
+            |        C C C C C C|
+            |          C C C C C|
+            |            C C C C|
+            |              C C C|
+            |                C C|
+            ⌊                  C⌋
+                                ⌈D D D D D D D D D D⌉
+                                |  D D D D D D D D D|
+                                |    D D D D D D D D|
+                                |      D D D D D D D|
+                                |        D D D D D D|
+                                |          D D D D D|
+                                |            D D D D|
+                                |              D D D|
+                                |                D D|
+                                ⌊                  D⌋
+                                                    ⌈E E E E E⌉
+                                                    |  E E E E|
+                                                    |    E E E|
+                                                    |      E E|
+                                                    ⌊        E⌋
                                                               [F]
 
 ```
