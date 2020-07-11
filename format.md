@@ -1,5 +1,5 @@
 
-# Data format
+# Data Format
 
 Read [process overview](process.md) before this.
 This file explain the necessary conventions to decipher the data on Google Drive
@@ -21,11 +21,11 @@ RREF-pattern is more complicated.
 In general, an RREF-pattern of RM32 looks like
 ```
 [A]
-   [B B B B B]
-   [  B B B B]
-   [    B B B]
-   [      B B]
-   [        B]
+  [B B B B B]
+  [  B B B B]
+  [    B B B]
+  [      B B]
+  [        B]
             [C C C C C C C C C C]
             [  C C C C C C C C C]
             [    C C C C C C C C]
@@ -36,22 +36,22 @@ In general, an RREF-pattern of RM32 looks like
             [              C C C]
             [                C C]
             [                  C]
-                                 [D D D D D D D D D D]
-                                 [  D D D D D D D D D]
-                                 [    D D D D D D D D]
-                                 [      D D D D D D D]
-                                 [        D D D D D D]
-                                 [          D D D D D]
-                                 [            D D D D]
-                                 [              D D D]
-                                 [                D D]
-                                 [                  D]
-                                                      [E E E E E]
-                                                      [  E E E E]
-                                                      [    E E E]
-                                                      [      E E]
-                                                      [        E]
-                                                                 [F]
+                                [D D D D D D D D D D]
+                                [  D D D D D D D D D]
+                                [    D D D D D D D D]
+                                [      D D D D D D D]
+                                [        D D D D D D]
+                                [          D D D D D]
+                                [            D D D D]
+                                [              D D D]
+                                [                D D]
+                                [                  D]
+                                                    [E E E E E]
+                                                    [  E E E E]
+                                                    [    E E E]
+                                                    [      E E]
+                                                    [        E]
+                                                              [F]
 
 ```
 
@@ -84,8 +84,7 @@ For example,
 ```
 
 The first number three digits is the `A`-part.
-the next five groups of three-digits are the `B`-part.
+the next five groups of three-digits are the `B`-part
+(regardless of whether the B-part is of height five or less).
 And so on.
 The number at the end is the multiplicity.
-
-@@@explain source code.

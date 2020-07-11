@@ -7,7 +7,7 @@ can be summarized as follows.
 * Compute the RREF-signature polynomial of RM32 from scratch (hard).
 * Compute the pivot-signature polynomial of RM64 from the former
     (VERY DIFFICULT).
-* Reduce the former to the Tutte polynomial (very easy).
+* Reduce the former to the Tutte polynomial (easy).
 
 This does not answers any question at all, if not posing new.
 Let me explain some terminologies and concepts.
@@ -61,7 +61,7 @@ is the right one.
 That is, `[1;1]` ⊗ `RM(r, m)` ⊕ `[0;1]` ⊗ `RM(r-1, m)` = `RM(r, m+1)`.
 
 It is usually desired to focus on the *increments*:
-`RM(r, m)` = `RM(r-1, m)` ⊕ `rm(r, m)`
+`rm(r, m)` ⊕ `RM(r-1, m)` = `RM(r, m)`
 
 ```text
                                                 rm(6, 6)
@@ -95,11 +95,11 @@ is `rm(r, m+1)`.
 Fix a code length, say 2^6 = 64.
 Choose a generator matrix such that
 
-* its first column generates `RM(0, 6)`.
+* its first column generates `RM(0, 6)`,
 * its first seven columns generate `RM(1, 6)`,
 * ...
 * its first 63 columns generates `RM(5, 6)`, and
-* it generates `RM(6, 6)`,
+* it generates `RM(6, 6)`.
 
 In other words, we are augmenting the generator matrices
 of `rm(0, 6)`, `rm(1, 6)`, ..., and `rm(6, 6)`.
@@ -174,8 +174,8 @@ For the record, the matrix looks like
 #---------------------------------------------------------------
 ```
 
-Let `AccessPattern` be the power set of the rows of the generator matrix.
-That is, an element `A` of `AccessPattern` is a subset of rows.
+Let `AccessPatterns` be the power set of the rows of the generator matrix.
+That is, an element `A` of `AccessPatterns` is a subset of rows.
 `A` is treated as a standalone matrix; compute its RREF.
 Read off the positions of the pivots, and call it the *pivot-pattern* of `A`.
 Define the *pivot-signature polynomial*
@@ -187,7 +187,7 @@ sum(
     product(
         z_p for p in PivotPattern(A)
     )
-    for A in AccessPattern
+    for A in AccessPatterns
 )
 ```
 
@@ -232,27 +232,27 @@ For instance, consider a pivot-pattern `11100101000.....`.
 Instead of an RREF of the form
 
 ```text
-1 0 0 a d 0 g 0 k p u . . . . .
-  1 0 b e 0 h 0 l q v . . . . .
-    1 c f 0 i 0 m r w . . . . .
-          1 j 0 n s x . . . . .
-              1 o t y . . . . .
-                      . . . . .
-                            . .
-                              .
+ 1 0 0 a d 0 g 0 k p u . . . . .
+   1 0 b e 0 h 0 l q v . . . . .
+     1 c f 0 i 0 m r w . . . . .
+           1 j 0 n s x . . . . .
+               1 o t y . . . . .
+                       . . . . .
+                             . .
+                               .
 ```
 
 we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
 
 ```text
 [1]
-   [1 0 b e]
-   [  1 c f]
-            [1 j 0 n s x]
-            [    1 o t y]
-                         [. . . .]
-                         [      .]
-                                  [.]
+  [1 0 b e]
+  [  1 c f]
+          [1 j 0 n s x]
+          [    1 o t y]
+                      [. . . .]
+                      [      .]
+                              [.]
 ```
 
 What, you ask, is all of these for?
@@ -283,29 +283,28 @@ We take two RREF-pattern from RM16:
 
 ```text
 [A]
-   [B B B B]
-   [    B B]
-            [C C C C C C]
-            [    C C C C]
-            [        C C]
-                         [D D D D]
-                         [    D D]
-                                  [E]
+  [B B B B]
+  [    B B]
+          [C C C C C C]
+          [    C C C C]
+          [        C C]
+                      [D D D D]
+                      [    D D]
+                              [E]
 ```
 
 and
 
 ```text
 [F]
-   [G G G G]
-   [  G G G]
-   [      G]
-            [H H H H H H]
-            [  H H H H H]
-            [          H]
-                         [  I I I]
-                         [      I]
-                                  []
+  [G G G G]
+  [  G G G]
+  [      G]
+          [H H H H H H]
+          [  H H H H H]
+          [          H]
+                      [  I I I]
+                              [ ]
 ```
 
 Now apply the recursive rule:
@@ -313,22 +312,21 @@ Now apply the recursive rule:
 ```text
 [A  ]
 [F F]
-     [B B B B        ]
-     [    B B        ]
-     [G G G G G G G G]
-     [  G G G   G G G]
-     [      G       G]
-                      [C C C C C C            ]
-                      [    C C C C            ]
-                      [        C C            ]
-                      [H H H H H H H H H H H H]
-                      [  H H H H H   H H H H H]
-                      [          H           H]
-                                                [D D D D        ]
-                                                [    D D        ]
-                                                [  I I I   I I I]
-                                                [      I       I]
-                                                                 [E  ]
+    [B B B B        ]
+    [    B B        ]
+    [G G G G G G G G]
+    [  G G G   G G G]
+    [      G       G]
+                    [C C C C C C            ]
+                    [    C C C C            ]
+                    [        C C            ]
+                    [H H H H H H H H H H H H]
+                    [  H H H H H   H H H H H]
+                    [          H           H]
+                                             [D D D D        ]
+                                             [    D D        ]
+                                             [  I I I   I I I]s
+                                                             [E  ]
 ```
 
 Now take RREF and read off pivots of RM64.
@@ -340,7 +338,8 @@ we will have to build the understanding of `RREFSign(RM64)` from scratch.
 
 ## Implementation details
 
-See [data format](format.md).
+See [data format](format.md) for more on how to store RREF-patterns.
+See [RREF source code](rm34rref) and [squaring source code](rm71square).
 
 For details concerning folder and file names on Blue Waters,
 see [Directories on BW](directory.md).
