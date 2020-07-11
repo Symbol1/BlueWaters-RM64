@@ -10,7 +10,7 @@ can be summarized as follows.
 * Reduce the former to the Tutte polynomial (very easy).
 
 This does not answers any question at all, if not posing new.
-Let me explain some terminology and concept.
+Let me explain some terminologies and concepts.
 
 ## Reed--Muller codes
 
@@ -19,6 +19,7 @@ that possess symmetric and recursive structures.
 In the usual notation, `RM(0, 5)` is the repetition code;
 `RM(1, 5)` consists of `RM(0, 5)` plus linear monomials (z₁, z₂, etc);
 `RM(2, 5)` consists of `RM(1, 5)` plus quadratic monomials (z₁z₂, z₁z₃, etc).
+And so on.
 
 More figuratively, the recursive structure is a *Pascal's rule*.
 
@@ -49,7 +50,15 @@ RM( r , m)
 RM(r-1, m)
 ```
 
-the direct sum of the left two is the right one.
+the direct sum
+
+```text
+[RM(r, m)] ⊕ [RM(r-1, m)]
+[RM(r, m)]   [     0    ]
+```
+
+is the right one.
+That is, `[1;1]` ⊗ `RM(r, m)` ⊕ `[0;1]` ⊗ `RM(r-1, m)` = `RM(r, m+1)`.
 
 It is usually desired to focus on the *increments*:
 `RM(r, m)` = `RM(r-1, m)` ⊕ `rm(r, m)`
@@ -70,33 +79,112 @@ rm(0, 0)        rm(1, 2)        rm(2, 4)        rm(3, 6)
                                                 rm(0, 6)
 ```
 
-Then `rm(r, m)` has dimension m choose r.
-And the left two of any triangle direct sum to the right one.
+Then the dimension of `rm(r, m)` is m choose r.
+And
+
+```text
+[rm(r, m)] ⊕ [rm(r-1, m)]
+[rm(r, m)]   [     0    ]
+```
+
+is `rm(r, m+1)`.
+
 
 ## Pivot-signature polynomial
 
 Fix a code length, say 2^6 = 64.
 Choose a generator matrix such that
 
-* it generates `RM(6, 6)`,
-* its last 57 columns generates `RM(5, 6)`,
+* its first column generates `RM(0, 6)`.
+* its first seven columns generate `RM(1, 6)`,
 * ...
-* its last seven columns generate `RM(1, 6)`, and
-* its last column generates `RM(0, 6)`.
+* its first 57 columns generates `RM(5, 6)`, and
+* it generates `RM(6, 6)`,
 
 In other words, we are augmenting the generator matrices
-of `rm(6, 6)`, `rm(5, 6)`, ..., and `rm(0, 6)`.
+of `rm(0, 6)`, `rm(1, 6)`, ..., and `rm(6, 6)`.
+Note that we are using thin and tall generator matrices,
+and message vectors are multiplied from the right.
+For the record, the matrix looks like 
+```text
+################################################################
+#-#####--#-##-###-####---#--#-##--#-##-###----#---#--#-##-----#-
+##-####-#-#-##-###-###--#--#-#-#-#-#-##-##---#---#--#-#-#----#--
+#--####-----#--##--###---------#-----#--##--------------#-------
+###-####--##-##-###-##-#--#--##-#--##-##-#--#---#--#--##----#---
+#-#-###----#--#-#-#-##--------#-----#--#-#-------------#--------
+##--###---#--#--##--##-------#-----#--#--#------------#---------
+#---###---------#---##-------------------#----------------------
+####-#####---###-###-##---###---###---###--#---#---###-----#----
+#-##-##--#----##--##-#------#-----#----##------------#----------
+##-#-##-#----#-#-#-#-#-----#-----#----#-#-----------#-----------
+#--#-##--------#---#-#------------------#-----------------------
+###--###-----##--##--#----#-----#-----##-----------#------------
+#-#--##-------#---#--#-----------------#------------------------
+##---##------#---#---#----------------#-------------------------
+#----##--------------#------------------------------------------
+#####-#######----####-####------######----#----####-------#-----
+#-###-#--#-##-----###----#--------#-##------------#-------------
+##-##-#-#-#-#----#-##---#--------#-#-#-----------#--------------
+#--##-#-----#------##----------------#--------------------------
+###-#-##--##-----##-#--#--------#--##-----------#---------------
+#-#-#-#----#------#-#---------------#---------------------------
+##--#-#---#------#--#--------------#----------------------------
+#---#-#-------------#-------------------------------------------
+####--####-------###--#---------###------------#----------------
+#-##--#--#--------##--------------#-----------------------------
+##-#--#-#--------#-#-------------#------------------------------
+#--#--#------------#--------------------------------------------
+###---##---------##-------------#-------------------------------
+#-#---#-----------#---------------------------------------------
+##----#----------#----------------------------------------------
+#-----#---------------------------------------------------------
+######-##########-----##########----------#####----------#------
+#-####---#-##-###--------#--#-##--------------#-----------------
+##-###--#-#-##-##-------#--#-#-#-------------#------------------
+#--###------#--##--------------#--------------------------------
+###-##-#--##-##-#------#--#--##-------------#-------------------
+#-#-##-----#--#-#-------------#---------------------------------
+##--##----#--#--#------------#----------------------------------
+#---##----------#-----------------------------------------------
+####-#-###---###------#---###--------------#--------------------
+#-##-#---#----##------------#-----------------------------------
+##-#-#--#----#-#-----------#------------------------------------
+#--#-#---------#------------------------------------------------
+###--#-#-----##-----------#-------------------------------------
+#-#--#--------#-------------------------------------------------
+##---#-------#--------------------------------------------------
+#----#----------------------------------------------------------
+#####--######---------####----------------#---------------------
+#-###----#-##------------#--------------------------------------
+##-##---#-#-#-----------#---------------------------------------
+#--##-------#---------------------------------------------------
+###-#--#--##-----------#----------------------------------------
+#-#-#------#----------------------------------------------------
+##--#-----#-----------------------------------------------------
+#---#-----------------------------------------------------------
+####---###------------#-----------------------------------------
+#-##-----#------------------------------------------------------
+##-#----#-------------------------------------------------------
+#--#------------------------------------------------------------
+###----#--------------------------------------------------------
+#-#-------------------------------------------------------------
+##--------------------------------------------------------------
+#---------------------------------------------------------------
+```
 
 Let `AccessPattern` be the power set of the rows of the generator matrix.
 That is, an element `A` of `AccessPattern` is a subset of rows.
 `A` is treated as a standalone matrix; compute its RREF.
-The pivot-signature polynomial is the collection of the positions of the pivots.
-In detail, the pivot-signature polynomial is
+Read off the positions of the pivots, and call it the *pivot-pattern* of `A`.
+Define the *pivot-signature polynomial*
+of the generator matrix as the collection of all pivots-patterns.
+More precisely,
 
 ```python
 sum(
     product(
-        z_p for p in PivotIndicesOf(A)
+        z_p for p in PivotPattern(A)
     )
     for A in AccessPattern
 )
@@ -109,9 +197,9 @@ How many pivots lies in the `rm(r, 6)` region for each r?
 And how does the pattern of the pivots behave?
 
 Note that there is an easy way to represent the pivot pattern.
-Simply write a binary number `1110010...0` to represent the case
+Simply write a binary number `11100101000` to represent the case
 where the first three columns have pivots, but not the next two,
-yet the next is a pivot, and the rest are not.
+yet the next is a pivot, followed by a non-pivot, etc.
 
 Therefore, the pivot-signature polynomial can be encoded
 by a file with many lines, each line containing a monomial (i.e., pivot pattern)
@@ -127,28 +215,30 @@ fff0ff0002c00000         161f4000
 ...
 ```
 
-Of course hexadecimal saves resources;
-and there is no need to put the prefix `0x` if it is the default.
+Of course hexadecimal saves resources.
+No need to put `0x` as we later read the file by `%x`.
 
 ## RREF-signature polynomial
 
-One could go one step further and ask, instead of the patterns,
+One could go one step further and ask, instead of the pivot patterns,
 How does the RREF itself distribute?
 This is not necessary a wise question to ask because the RREFs are all distinct;
-there is no *statistics* if all samples are unique in its own.
+there is no *statistics* if all samples are unique in their own.
 
 However, there is a relief---instead of the full RREF,
 we are interested in RREFs restricted to certain blocks.
-For instance, consider a pivot pattern `11100101000...`.
+For instance, consider a pivot pattern `11100101000.....`.
 Instead of an RREF of the form
 
 ```text
-1 0 0 a d 0 g 0 k p u . . .
-  1 0 b e 0 h 0 l q v . . .
-    1 c f 0 i 0 m r w . . .
-          1 j 0 n s x . . .
-              1 o t y . . .
-                      . . .
+1 0 0 a d 0 g 0 k p u . . . . .
+  1 0 b e 0 h 0 l q v . . . . .
+    1 c f 0 i 0 m r w . . . . .
+          1 j 0 n s x . . . . .
+              1 o t y . . . . .
+                      . . . . .
+                            . .
+                              .
 ```
 
 we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
@@ -160,34 +250,95 @@ we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
             [1 j 0 n s x]
             [    1 o t y]
                          [. . . .]
+                         [      .]
                                   [.]
 ```
 
 What, you ask, is all of these for?
-Well, the answer is that, if we define the RREF-signature polynomial properly,
-then the RREF-signatures of RM32 determine the pivot-signatures of RM64.
+Well, if we define the RREF-signature polynomial properly,
+the RREF-patterns of RM32 will determine the pivot-patterns of RM64.
 Notationally,
 
-```text
-Pivot_Sign( RM64 ) = Simplify( RREF_Sign( RM32 )^2 )
+```python
+PivotSign(RM64) = Simplify( RREFSign(RM32)^2 )
 ```
 
-## The squaring process
+The magic is behind the squaring operation.
 
-One might ask, Why the pivot-signatures of RM64
-is related to the RREF-signatures of RM32?
+## The squaring operation
+
+One might ask, Why the pivot-patterns of RM64
+is ever related to the RREF-patterns of RM32?
 Essentially, this is because
-we can define RM64 using RM32 following the recursive rule.
+RM64 is related to RM32 via the recursive structure.
 
-In fact, we see RREF-signatures as whatever that is (necessary and) sufficient
-to understand the pivot-signatures of the next level.
-We obtain a proper definition of RREF-signatures by
+In fact, we see RREF-patterns as whatever that is (necessary and) sufficient
+to understand the pivot-patterns of the next level.
+We obtain a proper definition of RREF-patterns by
 reverse-engineering the recursive structure of Reed--Muller codes.
 
-Note that `RREF_Sign( RM32 )` does not determine `RREF_Sign( RM64 )`;
+Here is a imaginative demonstration of how squaring works.
+We take two RREF-pattern from RM16:
+
+```text
+[A]
+   [B B B B]
+   [    B B]
+            [C C C C C C]
+            [    C C C C]
+            [        C C]
+                         [D D D D]
+                         [    D D]
+                                  [E]
+```
+
+and
+
+```text
+[F]
+   [G G G G]
+   [  G G G]
+   [      G]
+            [H H H H H H]
+            [  H H H H H]
+            [          H]
+                         [  I I I]
+                         [      I]
+                                  []
+```
+
+Now apply the recursive rule:
+
+```text
+[A  ]
+[F F]
+     [B B B B        ]
+     [    B B        ]
+     [G G G G G G G G]
+     [  G G G   G G G]
+     [      G       G]
+                      [C C C C C C            ]
+                      [    C C C C            ]
+                      [        C C            ]
+                      [H H H H H H H H H H H H]
+                      [  H H H H H   H H H H H]
+                      [          H           H]
+                                                [D D D D        ]
+                                                [    D D        ]
+                                                [  I I I   I I I]
+                                                [      I       I]
+                                                                 [E  ]
+```
+
+Now take RREF and read off pivots of RM64.
+
+
+
+
+Note that `RREFSign(RM32)` does not determine `RREFSign(RM64)`;
 this method is not inductive.
-As a result, if we want to understand `Pivot_Sign( RM128 )`,
-we will have to build the understanding of `RREF_Sign( RM64 )` from scratch.
+As a result, if we want to understand `PivotSign(RM128)`,
+we will have to build the understanding of `RREFSign(RM64)` from scratch.
 
 ## Implementation details
 
