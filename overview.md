@@ -1,7 +1,7 @@
 
-# Project Overview
+# Process Overview
 
-The entire project of computing the Tutte polynomial of `RM(2, 6)`
+The entire process of computing the Tutte polynomial of `RM(2, 6)`
 can be summarized as follows.
 
 * Compute the RREF-signature polynomial of RM32 from scratch (hard).
