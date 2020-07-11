@@ -3,10 +3,10 @@
 
 The entire project of computing the Tutte polynomial of `RM(2, 6)`
 can be summarized as follows.
- 
-* Compute the RREF-signature polynomial of RM32 from scratch.
-* Compute the pivot-signature polynomial of RM64 from the former.
-* Specialize the former to the Tutte polynomial
+
+* Compute the RREF-signature polynomial of RM32 from scratch (hard).
+* Compute the pivot-signature polynomial of RM64 from the former (VERY HARD).
+* Reduce the former to the Tutte polynomial (very easy).
 
 This does not answers any question at all, if not posing new.
 Let me explain some terminology and concept.
@@ -16,8 +16,8 @@ Let me explain some terminology and concept.
 Reed--Muller code is a series of linear block codes
 that possess symmetric and recursive structures.
 In the usual notation, `RM(0, 5)` is the repetition code;
-`RM(1, 5)` consists of `RM(0, 5)` plus linear monomials (x₁, x₂, etc);
-`RM(2, 5)` consists of `RM(1, 5)` plus quadratic monomials (x₁x₂, x₁x₃, etc).
+`RM(1, 5)` consists of `RM(0, 5)` plus linear monomials (z₁, z₂, etc);
+`RM(2, 5)` consists of `RM(1, 5)` plus quadratic monomials (z₁z₂, z₁z₃, etc).
 
 More figuratively, the recursive structure is a *Pascal's rule*.
 
@@ -72,19 +72,25 @@ rm(0, 0)        rm(1, 2)        rm(2, 4)        rm(3, 6)
 Then `rm(r, m)` has dimension m choose r.
 And the left two of any triangle direct sum to the right one.
 
-## Pivot signature polynomial
+## Pivot-signature polynomial
 
-Fix a code, say `RM(2, 6)`.
-Choose a generator matrix such that its last row generates `RM(0, 6)`,
-and its last six rows generate `RM(1, 6)`.
-In other words, we are stacking the generator matrices
-of `rm(2, 6)`, `rm(1, 6)`, and `rm(0, 6)`.
+Fix a code length, say 2^6 = 64.
+Choose a generator matrix such that
 
-Let `AccessPattern` be the power set of the columns of the generator matrix.
-That is, an element `A` of `AccessPattern` is a subset of columns.
+* it generates `RM(6, 6)`,
+* its last 57 columns generates `RM(5, 6)`,
+* ...
+* its last seven columns generate `RM(1, 6)`, and
+* its last column generates `RM(0, 6)`.
+
+In other words, we are augmenting the generator matrices
+of `rm(6, 6)`, `rm(5, 6)`, ..., and `rm(0, 6)`.
+
+Let `AccessPattern` be the power set of the rows of the generator matrix.
+That is, an element `A` of `AccessPattern` is a subset of rows.
 `A` is treated as a standalone matrix; compute its RREF.
-The pivot signature polynomial is the collection of the positions of the pivots.
-In detail, the pivot signature polynomial is
+The pivot-signature polynomial is the collection of the positions of the pivots.
+In detail, the pivot-signature polynomial is
 
 ```python
 sum(
@@ -94,3 +100,41 @@ sum(
     for A in AccessPattern
 )
 ```
+
+where z₁, z₂, ... are variables.
+
+This polynomial encodes the info we want to know,
+How many pivots lies in the `rm(r, 6)` region for each r?
+And how does the pattern of the pivots behave?
+
+Note that there is an easy way to represent the pivot pattern.
+Simply write a binary number 1110010...0 to represent the case
+where the first three columns have pivots, but not the next to,
+yet the next is a pivot, and the rest are not.
+
+Therefore, the pivot-signature polynomial can be encoded
+by a file with many lines, each line containing a monomial (i.e., pivot pattern)
+and the associated coefficient (i.e., multiplicity).
+For example,
+
+```python
+fff0ff0001400000         26dd8000
+fff0ff0001800000         b43f0000
+fff0ff0001c00000          e5ec000
+fff0ff0002800000         a0c2c000
+fff0ff0002c00000         161f4000
+...
+```
+
+Of course hexadecimal saves resources;
+and there is no need to put the prefix 0x if it is the default.
+
+## RREF-signature polynomial
+
+One could go one step further and ask, instead of the patterns,
+How does the RREF itself distribute?
+This is not necessary a wise question to ask because the RREFs
+are all distinct; we will end up *enumerating* 2^64 monomials.
+
+However, there is a relief---instead of the full RREF,
+we are interested in the
