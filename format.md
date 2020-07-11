@@ -1,6 +1,10 @@
 
 # Data format
 
+Read [process overview](process.md) before this.
+This file explain the necessary conventions to decipher the data on Google Drive
+<https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>.
+
 ## Pivot-pattern
 
 As we demonstrate in the [process overview](process.md),
