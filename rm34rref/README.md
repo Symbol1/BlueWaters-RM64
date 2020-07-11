@@ -1,6 +1,8 @@
 
 # RM32 RREF Comment
 
+Read [process overview](../process.md) before this.
+
 ## Data structure
 
 The correct way to declare `int array32[32];`
@@ -116,7 +118,8 @@ The defined polynomial addition is passed to openmp.
 #pragma omp declare reduction(omp_poly32_add:Poly32_t:omp_out=Poly32_add(omp_out,omp_in))
 ```
 
-The design is, each thread will deal with a small portion of `AccessPatterns`.
+The design is, each thread will deal with
+a small portion of access patterns.
 So each thread will end up with a partial RREF-signature polynomial.
 We want to add those polynomials at the openmp level to obtain the full.
 
@@ -138,7 +141,7 @@ Each row of the matrix is stored as an `uint32_t`.
 So the whole matrix is passed as an array, by reference.
 We are to perform elimination on-site.
 
-## main
+## int main
 
 Prepare the matrix.
 Columns with more `1` are moved to the left.
@@ -159,7 +162,7 @@ But we just specify the final result.
 
 ---
 
-We are about to start the main loop that go over all `AccessPatterns`.
+We are about to start the main loop that go over all access patterns.
 
 ```C++
     //          start the rref loop
@@ -190,6 +193,10 @@ This program is my local version, so `row_era_pat-=1234`.
 On Blue Waters, it is `-=1`.
 The `printf` are to give feedback to stdout.
 
+---
+
+keep or delete rows according to the erasure pattern.
+
 ```C++
         // copy the preserved matrix to working space
         int cardinality_acc=0; // tracking the number of rows that are preserved when erasing (i.e. cardinality in matroid language)
@@ -201,9 +208,25 @@ The `printf` are to give feedback to stdout.
                 cardinality_acc+=1;
             }
         }
-        
+```
+
+`RMpreserved` holds the submatrix.
+
+---
+
+```C++
         GaussianElimination(RMpreserved,cardinality_acc,thirtytwo);
-        
+```
+
+Now the elimination is done.
+The result is in `RMpreserved`.
+
+---
+
+Transcribe the result in `RMpreserved` to the tailor-made structure.
+And add that pattern to the polynomial.
+
+```C++
         // new a rref holder to hold the result
         rref32_t rref_holder;
         for(int i=0;i<thirtytwo;i++){
@@ -219,5 +242,23 @@ The `printf` are to give feedback to stdout.
         }
         // push rref_result into the map
         RREF_Signature_Counter[rref_holder.array]+=1;
+```
+
+`row` is the overall row index;
+`subrow` is the row index within a block.
+Notice how we use `.array` and `.block` interchangeably.
+
+---
+
+openmp magic (synthesizing the polynomial) happens here.
+
+```C++
     }
 ```
+
+## Pickling
+
+The rest is to printf the polynomial to a file.
+And other programs will pick up the work.
+See [data format](../format.md) and [directories on BW](../directory.md)
+for exactly how the intermediate data is transmitted.
