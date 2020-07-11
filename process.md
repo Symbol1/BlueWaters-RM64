@@ -196,15 +196,15 @@ This polynomial encodes the info we want to know,
 How many pivots lies in the `rm(r, 6)` region for each r?
 And how does the pattern of the pivots behave?
 
-Note that there is an easy way to represent the pivot pattern.
+Note that there is an easy way to represent the pivot-pattern.
 Simply write a binary number `11100101000` to represent the case
 where the first three columns have pivots, but not the next two,
 yet the next is a pivot, followed by a non-pivot, etc.
 
 Therefore, the pivot-signature polynomial can be encoded
-by a file with many lines, each line containing a monomial (i.e., pivot pattern)
+by a file with many lines, each line containing a monomial (i.e., pivot-pattern)
 and the associated coefficient (i.e., multiplicity).
-For example,
+For example:
 
 ```text
 fff0ff0001400000         26dd8000
@@ -220,14 +220,14 @@ No need to put `0x` as we later read the file by `%x`.
 
 ## RREF-signature polynomial
 
-One could go one step further and ask, instead of the pivot patterns,
+One could go one step further and ask, instead of the pivot-patterns,
 How does the RREF itself distribute?
 This is not necessary a wise question to ask because the RREFs are all distinct;
 there is no *statistics* if all samples are unique in their own.
 
 However, there is a relief---instead of the full RREF,
 we are interested in RREFs restricted to certain blocks.
-For instance, consider a pivot pattern `11100101000.....`.
+For instance, consider a pivot-pattern `11100101000.....`.
 Instead of an RREF of the form
 
 ```text
