@@ -61,31 +61,31 @@ should give a good approximation of the true distribution.
 ## Hypothesis testing
 
 The full computation costs 2,000 node-hours and is costly to redo.
-To make the computation falsifiable, we divide it into 48,520 subjobs;
+To make the computation falsifiable, we divide it into 48,520 sub-jobs;
 most of them cost less than 3 node-minutes.
-That makes each subjob replicable on modern laptops.
-Challengers are invited to rerun any subset of subjobs.
+That makes each sub-job replicable on modern laptops.
+Challengers are invited to rerun any subset of sub-jobs.
 Here is a possible setup.
 
 * **Null hypothesis:**
-  We made a systematic mistake that breaks 1% of subjobs or more.
+  We made a systematic mistake that breaks 1% of sub-jobs or more.
 
 * **Alternative hypothesis:**
-  Either we made no mistake or less than 1% of subjobs are broken.
+  Either we made no mistake or less than 1% of sub-jobs are broken.
 
-Assume a challenger randomly selects 70 out of 48,520 subjobs
+Assume a challenger randomly selects 70 out of 48,520 sub-jobs
 and reruns them (which should cost one laptop-day).
 Then the probability that it does not spot a mistake is
 > 99% ^ 70 ≈ 49.5%.
 
-If, instead, the challenger randomly selects and reruns 300 subjobs
+If, instead, the challenger randomly selects and reruns 300 sub-jobs
 (a laptop-week), then the probability that it does not spot a mistake is
 > 99% ^ 300 ≈ 4.9%.
 
 This is usually considered statistically significant.
 
-The data is uploaded to Google Drive  
-<https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>.
+The sub-job data is available on my [Google Drive].
+See [process overview](process.md) for detailed organization of sub-jobs.
 
 ### Remark
 
@@ -96,3 +96,4 @@ See, e.g., [Miller--Rabin primality test].
 [Magma]: https://en.wikipedia.org/wiki/Magma_(computer_algebra_system)
 [Tutte--Whitney polynomial]: https://en.wikipedia.org/wiki/Tutte_polynomial
 [Miller--Rabin primality test]: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+[Google Drive]: https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M
