@@ -53,8 +53,8 @@ RM(r-1, m)
 the direct sum
 
 ```text
-[RM(r, m)] ⊕ [RM(r-1, m)]
-[RM(r, m)]   [     0    ]
+⌈RM(r, m)⌉ ⊕ ⌈RM(r-1, m)⌉
+⌊RM(r, m)⌋   ⌊     0    ⌋
 ```
 
 is the right one.
@@ -83,8 +83,8 @@ Then the dimension of `rm(r, m)` is m choose r.
 And
 
 ```text
-[rm(r, m)] ⊕ [rm(r-1, m)]
-[rm(r, m)]   [     0    ]
+⌈rm(r, m)⌉ ⊕ ⌈rm(r-1, m)⌉
+⌊rm(r, m)⌋   ⌊     0    ⌋
 ```
 
 is `rm(r, m+1)`.
@@ -338,7 +338,12 @@ we will have to build the understanding of `RREFSign(RM64)` from scratch.
 
 ## Scale and parallelism
 
-@@@
+RREF is easy and can be done in one node.
+(Need openmp but not MPI).
+
+Squaring is 1.7 million squared.
+
+To remediate, divide the 1.7 million term polynomial into 311 subpolynomials.
 
 ## Implementation details
 
@@ -346,4 +351,4 @@ See [data format](format.md) for more on how to store RREF-patterns.
 See [RREF source code](rm34rref) and [squaring source code](rm71square).
 
 For details concerning folder and file names on Blue Waters,
-see [Directories on BW](directory.md).
+see [directories on BW](directory.md).
