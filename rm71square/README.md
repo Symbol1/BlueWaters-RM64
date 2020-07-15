@@ -149,7 +149,6 @@ Read the sub-polynomial from the file numbered `subtxt_no_SSS`.
         // read subtxt, the sss serm
         Poly32_t RREF_Signature_SSS;
         coef64_t coefficient_sss_acc=0;
-        {
 ```
 
 ## Inner openmp loop

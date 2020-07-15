@@ -20,7 +20,7 @@ Thus the multiplicity/coefficient can be held by a `u_int64_t`.
 RREF-pattern is more complicated.
 In general, an RREF-pattern of RM32 looks like
 
-```
+```text
 [A]
   ⌈B B B B B⌉
   |  B B B B|
@@ -77,6 +77,7 @@ The multiplicity uses `%4x`.
 For example, the is around line 8,909,373 of the file `rm32rref.txt`:
 
 ```text
+...
 001 010 008 004 002 001 200 104 084 042 020 013 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000   40
 001 010 008 004 002 001 200 104 084 042 020 013 008 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000  120
 001 010 008 004 002 001 200 104 084 042 020 013 008 000 000 000 084 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000   20
