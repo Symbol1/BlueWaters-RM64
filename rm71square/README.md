@@ -53,10 +53,29 @@ as in the [rm32rref computation](../rm34rref).
 
 ---
 
-We are to compute the pivot-signature polynomials of RM64.
-This is the dedicated type for that.
+We are to read in the RREF-signature polynomial of RM32
+compute the pivot-signature polynomial of RM64.
+These are the dedicated type for polynomials.
 
 ```C++
+// our beloved pivot/rref signature polynomial is an std::map
+typedef struct rref_coef_pair_t{
+    rref32_t rref;
+    coef64_t coef;
+}rref_coef_pair_t;
+typedef rref_coef_pair_t Poly32_t[fiveseventwoninefive];
+#include<map>
+typedef map<pattern64_t,coef64_t> Poly64_t;
+```
+
+---
+
+Define addition.
+
+```C++
+#include<map>
+typedef map<pattern64_t,coef64_t> Poly64_t;
+
 // declare how to add polynomial in C++
 Poly64_t&Poly64_add(Poly64_t&left,Poly64_t&right){
     for(const auto&piv_coe_pair:right){
@@ -105,7 +124,7 @@ Initialize MPI magic.
 
 The outer loop is for MPI magic.
 We rent 50--200 nodes at a time and each node becomes one MPI unit.
-(Within node, openmp works to distribute loads to various threads.)
+(Within node, openmp works to distribute loads to its threads.)
 
 ```C++
     // the loop for different pair of subtxt
@@ -153,7 +172,8 @@ Read the sub-polynomial from the file numbered `subtxt_no_SSS`.
 
 ## Inner openmp loop
 
-Iterate through all monomials.
+Iterate through all monomials from the first file;
+inside that, iterate through all monomials from the second file.
 
 ```C++
         // start the rref-pair loop
@@ -164,10 +184,35 @@ Iterate through all monomials.
             for(int serm=0;serm<fiveseventwoninefive;serm+=1){
                 rref32byblock_t TERM=RREF_Signature_TTT[term].rref.block;
                 rref32byblock_t SERM=RREF_Signature_SSS[serm].rref.block;
-                pattern64_t pivot_pattern=0;
 ```
 
 ---
+
+Perform RREF.
+Doing so block-wise is faster.
+
+```C++
+                pattern64_t pivot_pattern=0;
+                for(int block=0;block<=five;block++){
+                    matrixrow20_t PlotkinBlock[2*binomial5choose[block]]; // claim working space
+                    // no need to initialize because we will copy data and keep track of size
+                    int rank_acc=0;
+                    for(int subrow=0;subrow<binomial5choose[block]&&TERM[block][subrow];subrow++){
+                        PlotkinBlock[rank_acc]=TERM[block][subrow]*(1<<binomial5choose[block]);
+                        rank_acc++;
+                    }
+                    for(int subrow=0;subrow<binomial5choose[block]&&SERM[block][subrow];subrow++){
+                        PlotkinBlock[rank_acc]=SERM[block][subrow]*(1<<binomial5choose[block]|1);
+                        rank_acc++;
+                    }
+                    pattern64_t pivot_subpat=GaussianElimination(PlotkinBlock,rank_acc,2*binomial5choose[block]);
+                    pivot_pattern|=pivot_subpat<<(2*sumafter5choose[block]);
+                }
+```
+
+---
+
+opemmp magic happens here.
 
 ```C++
                 Pivot_Signature_Counter[pivot_pattern]+=RREF_Signature_TTT[term].coef*RREF_Signature_SSS[serm].coef;
@@ -175,11 +220,15 @@ Iterate through all monomials.
         }
 ```
 
-opemmp magic happens here.
-
 ## Pickling
 
-The rest is to output.
-We decided to generate a file per pair of sub-polynomials.
+The rest is to output the result.
+For any pair of input files, we output one file.
+For instance, if the inputs are `rm35rref123.txt` and `rm35rref456.txt`,
+respectively, the output will be `rm64pivot123x456.txt`.
 
-@@@
+We later merge these files into one `rm64pivotall.txt`.
+It is important that we do not delete the intermediate files
+(`rm64pivot123x456.txt` and its friends).
+So you, or anyone else, can double check our result by just picking two numbers
+(e.g., `121` and `343`) and generate their `rm64pivot121x343.txt`.
