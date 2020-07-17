@@ -54,12 +54,13 @@ RM(r-1, m)
 the direct sum
 
 ```text
-⌈RM(r, m)⌉ ⊕ ⌈RM(r-1, m)⌉
+⌈RM(r, m)⌉   ⌈RM(r-1, m)⌉
+|        | ⊕ |          |
 ⌊RM(r, m)⌋   ⌊     0    ⌋
 ```
 
 is the right one.
-That is, `[1;1]` ⊗ `RM(r, m)` ⊕ `[0;1]` ⊗ `RM(r-1, m)` = `RM(r, m+1)`.
+That is, `[1;1]` ⊗ `RM(r, m)` ⊕ `[1;0]` ⊗ `RM(r-1, m)` = `RM(r, m+1)`.
 
 It is sometimes desired to focus on the *increments*:
 `rm(r, m)` ⊕ `RM(r-1, m)` = `RM(r, m)`
@@ -84,7 +85,8 @@ Then the dimension of `rm(r, m)` is m choose r.
 And
 
 ```text
-⌈rm(r, m)⌉ ⊕ ⌈rm(r-1, m)⌉
+⌈rm(r, m)⌉   ⌈rm(r-1, m)⌉
+|        | ⊕ |          |
 ⌊rm(r, m)⌋   ⌊     0    ⌋
 ```
 
@@ -265,7 +267,7 @@ The figure explains it better.
 Everything outside the blocks are dropped.
 
 What, you ask, is all of these about?
-It tours out that, if we define the *RREF-signature polynomial* properly,
+It turns out that, if we define the *RREF-signature polynomial* properly,
 the RREF-patterns of RM32 will determine the pivot-patterns of RM64.
 Notationally,
 
@@ -275,7 +277,7 @@ PivotSign(RM64) = Simplify( RREFSign(RM32)^2 )
 
 The magic is behind the squaring operation.
 
-## The squaring operation
+## Squaring the RREF
 
 One might ask, Why the pivot-patterns of RM64
 is ever related to the RREF-patterns of RM32?
@@ -288,7 +290,7 @@ We obtain a proper definition of RREF-patterns by
 reverse-engineering the recursive structure of Reed--Muller codes.
 
 Here is a imaginative demonstration of how squaring works.
-We take two RREF-pattern from RM16:
+We take two RREF-patterns from RM16:
 
 ```text
 [A]
@@ -338,7 +340,9 @@ Now apply the recursive rule:
                                                              [E  ]
 ```
 
-Now take RREF and read off pivots of RM64.
+Now take RREF and read off pivots of RM32.
+For the actual computation, we take two RREF-patterns from RM32
+to obtain a pivot-pattern of RM64.
 
 Note that `RREFSign(RM32)` does not determine `RREFSign(RM64)`;
 this method is not inductive.
@@ -354,7 +358,7 @@ We simply
 * compute RREF,
 * crop the RREF-pattern according to the block decomposition
     `1 + 5 + 10 + 10 + 5 + 1`.
-* wirte the resulting RREF-signature polynomial to a text file.
+* write the resulting RREF-signature polynomial to a text file.
 
 This can be done on my laptop or using only one Blue Waters node.
 (Need openmp but not MPI.)
@@ -365,9 +369,9 @@ because it means we have to do ≈ 2^48 multiplications.
 
 To remediate, we divide the 1.7m-term polynomial into 311 sub-polynomials.
 We then compute the products of all pairs of these 311 sub-polynomials.
-There are 48,516 products to be computed,
+There are 48,516 pairs/products to be computed,
 each product costs a Blue Water node 3 minutes.
-Hence the entire job cost ≈ 2000 node-hours.
+Hence the entire job cost ≈ 2,000 node-hours.
 (Both openmp and MPI are used in this step.)
 
 ## Implementation details
