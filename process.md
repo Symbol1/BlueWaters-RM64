@@ -5,17 +5,18 @@ The entire process of computing the Tutte polynomial of `RM(2, 6)`
 can be summarized as follows.
 
 * Compute the RREF-signature polynomial of RM32 from scratch (hard).
-* Compute the pivot-signature polynomial of RM64 from the former
-    (VERY DIFFICULT).
-* Reduce the former to the Tutte polynomial (easy).
+* Compute the pivot-signature polynomial of RM64
+    from the result of the last step (VERY DIFFICULT).
+* Reduce the result of the last step to the Tutte polynomial (easy).
 
-This does not answers any question at all, if not posing new.
-Let me explain some terminologies and concepts.
+Before we dive into each bullet point,
+let me clarify some terminologies and concepts.
 
 ## Reed--Muller codes
 
-Reed--Muller code is a series of linear block codes
-that possess symmetric and recursive structures.
+[Reed--Muller code](https://en.wikipedia.org/wiki/Reed%E2%80%93Muller_code)
+is a series of linear block codes that possess
+rich symmetric and recursive structures.
 In the usual notation, `RM(0, 5)` is the repetition code;
 `RM(1, 5)` consists of `RM(0, 5)` plus linear monomials (z₁, z₂, etc);
 `RM(2, 5)` consists of `RM(1, 5)` plus quadratic monomials (z₁z₂, z₁z₃, etc).
@@ -60,7 +61,7 @@ the direct sum
 is the right one.
 That is, `[1;1]` ⊗ `RM(r, m)` ⊕ `[0;1]` ⊗ `RM(r-1, m)` = `RM(r, m+1)`.
 
-It is usually desired to focus on the *increments*:
+It is sometimes desired to focus on the *increments*:
 `rm(r, m)` ⊕ `RM(r-1, m)` = `RM(r, m)`
 
 ```text
@@ -89,10 +90,12 @@ And
 
 is `rm(r, m+1)`.
 
-
 ## Pivot-signature polynomial
 
-Fix a code length, say 2^6 = 64.
+We invent this term as an invariant that captures more information than
+[Tutte polynomial](https://en.wikipedia.org/wiki/Tutte_polynomial) does.
+
+Fix a code length one is interested in, say n = 2^6 = 64.
 Choose a generator matrix such that
 
 * its first column generates `RM(0, 6)`,
@@ -103,9 +106,9 @@ Choose a generator matrix such that
 
 In other words, we are augmenting the generator matrices
 of `rm(0, 6)`, `rm(1, 6)`, ..., and `rm(6, 6)`.
-Note that we are using thin and tall generator matrices,
-and message vectors are multiplied from the right.
-For the record, the matrix looks like
+Note that we are using thin and tall generator matrices
+(and message vectors are multiplied from the right).
+For the record, the augmented matrix looks like
 
 ```text
 ################################################################
@@ -193,19 +196,21 @@ sum(
 
 where z₁, z₂, ... are variables.
 
-This polynomial encodes the info we want to know,
+This polynomial encodes the answer to the question,
 How many pivots lies in the `rm(r, 6)` region for each r?
-And how does the pattern of the pivots behave?
+And how does the pattern of the pivots behave statistically?
 
-Note that there is an easy way to represent the pivot-pattern.
-Simply write a binary number `11100101000` to represent the case
+Note that there is an easy way to represent. pivot-patterns.
+Simply write a binary number `11100101000.....` to represent the case
 where the first three columns have pivots, but not the next two,
-yet the next is a pivot, followed by a non-pivot, etc.
+yet the next is a pivot, followed by a non-pivot, et seq.
+To shorten the representation, use hexadecimal;
+`1110` becomes `E`, `0101` becomes `5`, `000.` becomes `0` or `1`, et seq.
 
-Therefore, the pivot-signature polynomial can be encoded
-by a file with many lines, each line containing a monomial (i.e., pivot-pattern)
-and the associated coefficient (i.e., multiplicity).
-For example:
+Therefore, the pivot-signature polynomial can be encoded by a text file
+with many lines, each line corresponding to a monomial (i.e., a pivot-pattern)
+and the associated coefficient (i.e., the multiplicity).
+For example, a file may contain these lines:
 
 ```text
 fff0ff0001400000         26dd8000
@@ -216,20 +221,20 @@ fff0ff0002c00000         161f4000
 ...
 ```
 
-Of course hexadecimal saves resources.
-No need to put `0x` as we later read the file by `%x`.
+Signature-patterns are printed with `%016x` and multiplicities with `%16x`.
+No need to prefix `0x` as we later read the file by `%x`.
 
 ## RREF-signature polynomial
 
-One could go one step further and ask, instead of the pivot-patterns,
-How does the RREF itself distribute?
+One could go one step further and ask, in addition to pivot-patterns,
+How does the RREF itself behave?
 This is not necessary a wise question to ask because the RREFs are all distinct;
 there is no *statistics* if all samples are unique in their own.
 
 However, there is a relief---instead of the full RREF,
-we are interested in RREFs restricted to certain blocks.
-For instance, consider a pivot-pattern `11100101000.....`.
-Instead of an RREF of the form
+we are interested in RREFs in certain blocks.
+For instance, consider a pivot-pattern `11100101000.....`,
+It may come from an RREF like this:
 
 ```text
  1 0 0 a d 0 g 0 k p u . . . . .
@@ -242,7 +247,9 @@ Instead of an RREF of the form
                                .
 ```
 
-we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
+Instead of the full RREF, we are interested in
+the *pivotal blocks* w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`.
+The figure explains it better.
 
 ```text
 [1]
@@ -255,8 +262,10 @@ we are interested the RREF w.r.t. the block decomposition `1 + 4 + 6 + 4 + 1`:
                               [.]
 ```
 
-What, you ask, is all of these for?
-Well, if we define the RREF-signature polynomial properly,
+Everything outside the blocks are dropped.
+
+What, you ask, is all of these about?
+It tours out that, if we define the *RREF-signature polynomial* properly,
 the RREF-patterns of RM32 will determine the pivot-patterns of RM64.
 Notationally,
 
@@ -338,12 +347,28 @@ we will have to build the understanding of `RREFSign(RM64)` from scratch.
 
 ## Scale and parallelism
 
-RREF is easy and can be done in one node.
-(Need openmp but not MPI).
+The RREF-signature polynomial of RM32 is easy.
+We simply
 
-Squaring is 1.7 million squared.
+* enumerate all 2^32 subsets,
+* compute RREF,
+* crop the RREF-pattern according to the block decomposition
+    `1 + 5 + 10 + 10 + 5 + 1`.
+* wirte the resulting RREF-signature polynomial to a text file.
 
-To remediate, divide the 1.7 million term polynomial into 311 subpolynomials.
+This can be done on my laptop or using only one Blue Waters node.
+(Need openmp but not MPI.)
+
+The result is a polynomial with 17,818,745 ≈ 2^24 terms.
+Squaring this polynomial is not a joke,
+because it means we have to do ≈ 2^48 multiplications.
+
+To remediate, we divide the 1.7m-term polynomial into 311 sub-polynomials.
+We then compute the products of all pairs of these 311 sub-polynomials.
+There are 48,516 products to be computed,
+each product costs a Blue Water node 3 minutes.
+Hence the entire job cost ≈ 2000 node-hours.
+(Both openmp and MPI are used in this step.)
 
 ## Implementation details
 
