@@ -24,7 +24,7 @@ The following is a note on what is inside the directory
   That resulting polynomial has 17,818,745 monomials.
   Each monomial is encoded as a line
   so the resulting file, `rm32rref.txt`, has 17,818,745 lines.
-  After compressing, `rm32rref.zip` is 68.7Mb.
+  After compressing, `rm32rref.zip` is 68.7 MB.
   * > `rm32rref.txt`
   * > `rm32rref.zip`
 
@@ -85,8 +85,8 @@ The following is a note on what is inside the directory
   is computed distributedly and stored across 48,516 files.
   (48,516 = 1 + 2 + ... + 311.)
   We gather them and store the final result in this file.
-  It is has 7828354 lines/monomials and is 274MB.
-  After compressing 42.7MB.
+  It has 7,828,354 lines/monomials; and is 274 MB.
+  After compressing 42.7 MB.
   
   * > `rm64pivotall.txt`
 
