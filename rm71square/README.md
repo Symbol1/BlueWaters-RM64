@@ -226,9 +226,11 @@ The rest is to output the result.
 For any pair of input files, we output one file.
 For instance, if the inputs are `rm35rref123.txt` and `rm35rref456.txt`,
 respectively, the output will be `rm64pivot123x456.txt`.
+More on that in [directories on BW](../directory.md).
 
 We later merge these files into one `rm64pivotall.txt`.
 It is important that we do not delete the intermediate files
 (`rm64pivot123x456.txt` and its friends).
 So you, or anyone else, can double check our result by just picking two numbers
 (e.g., `121` and `343`) and generate their `rm64pivot121x343.txt`.
+More on that in [challenge the computation](../channelge.md).
