@@ -84,7 +84,7 @@ If, instead, the challenger randomly selects and reruns 300 sub-jobs
 
 This is usually considered statistically significant.
 
-The sub-job data is available on my [Google Drive].
+The sub-jobs data are available on my [Google Drive].
 See [process overview](process.md) for detailed organization of sub-jobs.
 
 ### Remark

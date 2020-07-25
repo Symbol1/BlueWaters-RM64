@@ -2,7 +2,7 @@
 # Data Format
 
 Read [process overview](process.md) before this.
-This file explain the necessary conventions to decipher the data on Google Drive
+This file explain necessary conventions to decipher the data on Google Drive
 <https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>.
 
 ## Pivot-pattern
@@ -92,7 +92,7 @@ the next five groups of three-digits are the `B`-part
 And so on.
 The number at the end is the multiplicity.
 
-The middle line is translated to:
+As an example, the middle line is translated into:
 
 ```text
 [001]
@@ -131,7 +131,7 @@ The middle line is translated to:
 
 with multiplicity 32.
 
-We expand the binary number:
+We expand the hexadecimal number:
 
 ```text
 [1]

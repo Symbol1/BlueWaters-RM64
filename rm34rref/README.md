@@ -103,7 +103,7 @@ Poly32_t&Poly32_add(Poly32_t&left,Poly32_t&right){
 }
 ```
 
-The for loop is equivalent to python `for piv_coe_pair in right:`,
+The for-loop is equivalent to python `for piv_coe_pair in right:`,
 where `left` is a polynomial.
 So each `piv_coe_pair` is a monomial `<RREF-pattern,multiplicity>`.
 Use `.first` and `.second` to access the components;
