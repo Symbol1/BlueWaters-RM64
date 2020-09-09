@@ -357,7 +357,7 @@ We simply
 * enumerate all 2^32 subsets,
 * compute RREF,
 * crop the RREF-pattern according to the block decomposition
-    `1 + 5 + 10 + 10 + 5 + 1`.
+    `1 + 5 + 10 + 10 + 5 + 1`,
 * write the resulting RREF-signature polynomial to a text file.
 
 This can be done on my laptop or using only one Blue Waters node.
@@ -367,8 +367,8 @@ The result is a polynomial with 17,818,745 ≈ 2^24 terms.
 Squaring this polynomial is not a joke,
 because it means we have to do ≈ 2^48 multiplications.
 
-To remediate, we divide the 1.7m-term polynomial into 311 sub-polynomials.
-We then compute the products of all pairs of these 311 sub-polynomials.
+To remediate, we divide the 1.7m-term polynomial into 311 *sub*-polynomials.
+We then compute the products of all pairs of these 311 *sub*-polynomials.
 There are 48,516 pairs/products to be computed,
 each product costs a Blue Water node 3 minutes.
 Hence the entire job cost ≈ 2,000 node-hours.
@@ -376,8 +376,14 @@ Hence the entire job cost ≈ 2,000 node-hours.
 
 ## Implementation details
 
-See [data format](format.md) for more on how to store RREF-patterns.
-See [RREF source code](rm34rref) and [squaring source code](rm71square).
+Computation wise, see [RREF source code](rm34rref) for
+how to compute RM32's RREF-signature polynomial.
+See [squaring source code](rm71square) for
+how to compute RM64's pivot-signature polynomial given the former.
 
+Storage wise, see [data format](format.md)
+for more on how we store RREF-patterns.
 For details concerning folder and file names on Blue Waters,
 see [directories on BW](directory.md).
+
+We encourage you to [challenge the computation](challenge.md).
