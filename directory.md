@@ -1,5 +1,10 @@
 # Directories on Blue Waters
 
+Read [process overview](process.md) before this.
+This file explains necessary conventions
+to decipher the filenames on Google Drive
+<https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M>.
+
 The project ID of our computation is `baus`.
 The following is a note on what is inside the directory
 `/projects/sciteam/baus`.
