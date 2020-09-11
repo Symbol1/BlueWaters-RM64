@@ -2,6 +2,8 @@
 # RM32 RREF Comment
 
 Read [process overview](../process.md) before this.
+This program prepare RREF-signature polynomial for
+[the other program to square](../rm71square/README.md)
 
 ## Data structure
 
@@ -75,7 +77,7 @@ On the other, it bears the block-wise decomposition.
 ---
 
 The RREF-signature polynomial is implemented as an `std::map`.
-An `std::map` is essentially python dictionary.
+An `std::map` is essentially a python dictionary.
 
 ```C++
 // our beloved pivot/rref signature polynomial is an std::map

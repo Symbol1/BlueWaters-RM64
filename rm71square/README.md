@@ -1,6 +1,9 @@
 
 # Squaring Comment
 
+Read [process overview](process.md) before this.
+This program is ran after [RREF is figured out](../rm34rref/README.md).
+
 ## Data structure
 
 Use versatile type names to indicate purpose.
