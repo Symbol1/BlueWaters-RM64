@@ -48,6 +48,8 @@ We compute its *[Tutte--Whitney polynomial]*
 and more general invariants on Blue Waters.
 See [the resulting polynomial](rm6422tutte.txt) in matrix form.
 
+See also the [Blue Waters Annual Report].
+
 For the general idea behind the computation,
 visit [process overview](process.md) and links therein.
 The full data set (modulo testing and log files etc)
@@ -62,5 +64,6 @@ This makes our computation (economically) *[falsifiable]*.
 [Blue Waters]: https://en.wikipedia.org/wiki/Blue_Waters
 [Reed-Muller code]: https://en.wikipedia.org/wiki/Reed%E2%80%93Muller_code
 [Tutte--Whitney polynomial]: https://en.wikipedia.org/wiki/Tutte_polynomial
+[Blue Waters Annual Report]: https://bluewaters.ncsa.illinois.edu/liferay-content/document-library/BW-Annual-Report-2019/bwar19.pdf#page=109
 [falsifiable]: https://en.wikipedia.org/wiki/Falsifiability
 [Google Drive .edu account]: https://drive.google.com/drive/folders/1zYv2R-oqepX1vJ_Fr5JBmrVNdle0mi9M
