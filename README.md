@@ -48,7 +48,7 @@ We compute its *[Tutte--Whitney polynomial]*
 and more general invariants on Blue Waters.
 See [the resulting polynomial](rm6422tutte.txt) in matrix form.
 
-See also the [Blue Waters Annual Report].
+See also the [Blue Waters Annual Report], page 109.
 
 For the general idea behind the computation,
 visit [process overview](process.md) and links therein.
